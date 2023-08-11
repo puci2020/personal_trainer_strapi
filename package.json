@@ -12,10 +12,13 @@
   "dependencies": {
     "@strapi/plugin-i18n": "4.12.1",
     "@strapi/plugin-users-permissions": "4.12.1",
+    "@strapi/provider-email-sendgrid": "^4.12.4",
     "@strapi/strapi": "4.12.1",
     "mysql": "2.18.1",
+    "nodemailer": "^6.9.4",
     "pg": "^8.11.2",
-    "pg-connection-string": "^2.6.2"
+    "pg-connection-string": "^2.6.2",
+    "strapi-provider-email-smtp": "^1.0.3"
   },
   "author": {
     "name": "A Strapi developer"
