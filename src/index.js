@@ -27,9 +27,35 @@ module.exports = {
         try {
           await strapi.plugins["email"].services.email.send({
             to: "adam.pucicki97@gmail.com",
-            from: "cycu2020@gmail.com", // e.g. single sender verification in SendGrid
-            subject: "The Strapi Email plugin worked successfully",
-            text: "ejejej",
+            from: result.email, // e.g. single sender verification in SendGrid
+            subject: result.subject,
+            text: `Wiadomość od: ${result.name} \n
+              Adres email: ${result.email} \n\n
+              Wiadomość: \n
+              ${result.message}`,
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    });
+
+    strapi.db.lifecycles.subscribe({
+      models: ["api::email.email"],
+      afterCreate: async ({ result }) => {
+        // omitted
+
+        console.log(result);
+
+        try {
+          await strapi.plugins["email"].services.email.send({
+            to: "adam.pucicki97@gmail.com",
+            from: result.email, // e.g. single sender verification in SendGrid
+            subject: result.subject,
+            text: `<b>Wiadomość od: ${result.name} \n</b> <br/>
+              <b>Adres email: ${result.email} \n</b> <br/><br/>
+              Wiadomość: \n <br/>
+              ${result.message}`,
           });
         } catch (err) {
           console.log(err);
