@@ -4,7 +4,8 @@
   "info": {
     "singularName": "feedback",
     "pluralName": "feedbacks",
-    "displayName": "Feedback"
+    "displayName": "Feedback",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,9 +17,6 @@
     },
     "description": {
       "type": "richtext"
-    },
-    "show": {
-      "type": "boolean"
     },
     "name": {
       "type": "string"

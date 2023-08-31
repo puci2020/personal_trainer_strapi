@@ -15,16 +15,11 @@ module.exports = ({ env }) => ({
     config: {
       provider: "strapi-provider-email-smtp",
       providerOptions: {
-        // host: "mail.apucicki.hs18.linux.pl", //SMTP Host
-        // port: 465, //SMTP Port
-        // secure: true,
-        // username: "adamx@apucicki.hs18.linux.pl",
-        // password: "Adibomba20?",
-        host: "smtp.gmail.com", //SMTP Host
+        host: process.env.SMTP, //SMTP Host
         port: 465, //SMTP Port
         secure: true,
-        username: "adam.pucicki97@gmail.com",
-        password: "mnnxnruswpbwdrwt",
+        username: process.env.EMAIL_ADRESS,
+        password: process.env.EMAIL_PASSWORD,
         rejectUnauthorized: true,
         requireTLS: true,
         connectionTimeout: 1,

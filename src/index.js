@@ -17,39 +17,37 @@ module.exports = {
    * run jobs, or perform some special logic.
    */
   bootstrap({ strapi }) {
-    strapi.db.lifecycles.subscribe({
-      models: ["api::feedback.feedback"],
-      afterCreate: async ({ result }) => {
-        // omitted
+    // strapi.db.lifecycles.subscribe({
+    //   models: ["api::feedback.feedback"],
+    //   afterCreate: async ({ result }) => {
+    //     // omitted
 
-        console.log(result);
+    //     console.log(result);
 
-        try {
-          await strapi.plugins["email"].services.email.send({
-            to: "adam.pucicki97@gmail.com",
-            from: result.email, // e.g. single sender verification in SendGrid
-            subject: result.subject,
-            text: `Wiadomość od: ${result.name} \n
-              Adres email: ${result.email} \n\n
-              Wiadomość: \n
-              ${result.message}`,
-          });
-        } catch (err) {
-          console.log(err);
-        }
-      },
-    });
+    //     try {
+    //       await strapi.plugins["email"].services.email.send({
+    //         to: "adam.pucicki97@gmail.com",
+    //         from: result.email, // e.g. single sender verification in SendGrid
+    //         subject: result.subject,
+    //         text: `Wiadomość od: ${result.name} \n
+    //           Adres email: ${result.email} \n\n
+    //           Wiadomość: \n
+    //           ${result.message}`,
+    //       });
+    //     } catch (err) {
+    //       console.log(err);
+    //     }
+    //   },
+    // });
 
     strapi.db.lifecycles.subscribe({
       models: ["api::email.email"],
       afterCreate: async ({ result }) => {
         // omitted
 
-        console.log(result);
-
         try {
           await strapi.plugins["email"].services.email.send({
-            to: "adam.pucicki97@gmail.com",
+            to: process.env.EMAIL_ADRESS,
             from: result.email, // e.g. single sender verification in SendGrid
             subject: result.subject,
             text: `<b>Wiadomość od: ${result.name} \n</b> <br/>
